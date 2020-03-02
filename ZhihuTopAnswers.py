@@ -13,7 +13,7 @@ top_answers_url = 'https://www.zhihu.com/topic/19776749/top-answers'
 
 def open_url_scrolldown(url, times):
     # zhi hu is lazy loading, so we use selenium, instead of urllib
-    browser = webdriver.Firefox(executable_path='./../libs/geckodriver')
+    browser = webdriver.Chrome(executable_path=r'MingxingLearnPython-master\lib\chromedriver.exe')
     browser.get(url)
     sleep(4)
     CommonUtils.ScrollPageDown(browser.find_element_by_tag_name('body'), times)
@@ -35,7 +35,7 @@ def download_top_answers(home_url):
         req_answer_html = answer_req.read().decode('utf-8')
         soup = BeautifulSoup(req_answer_html, features='html.parser')
         title = str.replace(soup.find('title').text, r'/', '')  # make it a safe path
-        new_file = './../spideroutcome/%4d-%s.html' % (file_seq_no, title)
+        new_file = r'MingxingLearnPython-master\data\%4d-%s.html' % (file_seq_no, title)
 
         if exists(new_file):
             continue
