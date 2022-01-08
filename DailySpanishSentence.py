@@ -1,7 +1,8 @@
-import urllib.error
+from email.header import Header
 import urllib.request
+import urllib.error
 from bs4 import BeautifulSoup
-from MyHtmlParser import MyHtmlParser
+from my_html_parser import MyHtmlParser
 from mail import EmailUtils
 
 class DailySentence:
@@ -9,11 +10,10 @@ class DailySentence:
     @staticmethod
     def get_daily_sentence():
         url = 'http://www.esdict.cn/home/dailysentence'
-
-        headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0"}
-
-        response = urllib.request.urlopen(url, timeout=10)
-        html = response.read().decode('utf-8')
+        req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"}) 
+        con = urllib.request.urlopen( req )
+        html = con.read().decode('utf-8')
+        
 
         # Use my html parser to  get all data
         html_parser = MyHtmlParser()
@@ -34,7 +34,7 @@ class DailySentence:
                 #send email
                 subject = 'Daily Spanish Sentence'
                 msg = line + '\n' + tran.text
-                EmailUtils.send_from_gmail_to_my_workemail(subject, msg.encode('utf-8'))
+                #EmailUtils.send_from_gmail_to_my_workemail(subject, msg.encode('utf-8'))
 
 
 
