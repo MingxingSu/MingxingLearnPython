@@ -13,7 +13,6 @@ class DailySentence:
         req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"}) 
         con = urllib.request.urlopen( req )
         html = con.read().decode('utf-8')
-        
 
         # Use my html parser to  get all data
         html_parser = MyHtmlParser()

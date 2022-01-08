@@ -7,13 +7,13 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from commutils import CommonUtils
 
-page_count_to_fetch = 5
+page_count_to_fetch = 1
 top_answers_url = 'https://www.zhihu.com/topic/19776749/top-answers'
 
 
 def open_url_scrolldown(url, times):
     # zhi hu is lazy loading, so we use selenium, instead of urllib
-    browser = webdriver.Chrome(executable_path=r'MingxingLearnPython-master\lib\chromedriver.exe')
+    browser = webdriver.Chrome(executable_path=r'MingxingLearnPython\lib\chromedriver.exe')
     browser.get(url)
     sleep(4)
     CommonUtils.ScrollPageDown(browser.find_element_by_tag_name('body'), times)
